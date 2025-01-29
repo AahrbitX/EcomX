@@ -1,0 +1,18 @@
+[data-pc-section="content"] {
+  @apply space-y-3;
+}
+
+[data-pc-section="itemcontainer"],
+[data-pc-section="thumbnailcontainer"] {
+  background-color: var(--surface-200);
+  @apply rounded-xl;
+}
+
+[data-pc-section="itemcontainer"] {
+  padding: 14px;
+  @apply h-[320px];
+}
+
+[data-pc-section="thumbnailitems"] {
+  gap: 12px;
+}

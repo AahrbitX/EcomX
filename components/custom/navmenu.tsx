@@ -64,15 +64,17 @@ export const MenuItem = ({
 
 export const Menu = ({
   setActive,
+  className,
   children,
 }: {
   setActive: (item: string | null) => void;
   children: React.ReactNode;
+  className?: string;
 }) => {
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className="relative"
+      className={`relative ${className}`}
     >
       {children}
     </nav>

@@ -1,4 +1,7 @@
+import "primereact/resources/themes/lara-light-blue/theme.css";
+import "primereact/resources/primereact.min.css";
 import "./globals.css";
+
 import type { Metadata } from "next";
 import { interVariable, dmsansVariable } from "./fonts";
 import { Providers } from "./providers";
@@ -17,14 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning lang="en">
-      <body className={`${interVariable} ${dmsansVariable} antialiased`}>
-        <Providers>
+    <Providers>
+      <html suppressHydrationWarning lang="en">
+        <body className={`${interVariable} ${dmsansVariable} antialiased`}>
           <Navbar />
           {children}
           <Footer />
-        </Providers>
-      </body>
-    </html>
+        </body>
+      </html>
+    </Providers>
   );
 }

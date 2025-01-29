@@ -6,7 +6,11 @@ interface LogoProps {
 }
 
 const Logo: FC<LogoProps> = ({ logoText = "YourLogo", className }) => {
-  return <div className={`text-2xl font-bold ${className}`}>{logoText}</div>;
+  return (
+    <div className={`text-2xl font-bold font-dmsans ${className}`}>
+      {logoText}
+    </div>
+  );
 };
 
 export default Logo;

@@ -1,6 +1,7 @@
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import Link from "next/link";
 import React from "react";
+
+import { dummyProducts } from "./dummy_products";
+import ProductCard from "@/app/(purchasepages)/common/product-card";
 
 function ProductsIndexPage() {
   return (
@@ -8,15 +9,9 @@ function ProductsIndexPage() {
       <p className="my-4 text-muted-foreground">
         products search bar and filters goes here
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {[1, 2, 3].map((i) => (
-          <Link href={`/products/${i}`} key={`product-${i}`}>
-            <Card>
-              <CardHeader>
-                <CardTitle>Product {i}</CardTitle>
-              </CardHeader>
-            </Card>
-          </Link>
+      <div className="flex flex-wrap gap-4">
+        {dummyProducts.map((i) => (
+          <ProductCard product={i} key={`product-${i.id}`} />
         ))}
       </div>
     </section>

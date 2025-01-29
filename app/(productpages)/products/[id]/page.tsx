@@ -1,48 +1,50 @@
 import React from "react";
-import { Product } from "@/types/product";
-import ProductDetails from "./components/product-details";
-// import ProductBackButton from "./components/product-back-button";
-import { CustomCarousel } from "./components/products-image-carousel";
+import ProductDetails from "./components/reviews";
+import { notFound } from "next/navigation";
+import ProductGallery from "./components/gallery";
+import { dummyProducts } from "../dummy_products";
+import { Button } from "primereact/button";
+import Link from "next/link";
+import { Metadata } from "next";
 
-function SpecificProductPage({ params }: { params: { id: string } }) {
-  const products: Product[] = [
-    {
-      id: 1,
-      name: "product 1",
-      price: 100,
-      description: "product 1 description",
-      image: "product 1 image",
-    },
-    {
-      id: 2,
-      name: "product 2",
-      price: 200,
-      description: "product 2 description",
-      image: "product 2 image",
-    },
-    {
-      id: 3,
-      name: "product 3",
-      price: 300,
-      description: "product 3 description",
-      image: "product 3 image",
-    },
-  ];
+type Props = {
+  params: Promise<{ id: string }>;
+};
 
-  const currProduct = products.find((i) => i.id === parseInt(params.id));
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const products = dummyProducts;
+  const currProduct = products.find((i) => i.id === parseInt(id));
+  return {
+    title: currProduct?.name || "Product Not Found",
+  };
+}
+
+async function SpecificProductPage({ params }: Props) {
+  const { id } = await params;
+  const products = dummyProducts;
+  const currProduct = products.find((i) => i.id === parseInt(id));
 
   if (!currProduct) {
-    return <div>Product not found</div>;
+    notFound();
   }
 
   return (
     <section className="container mt-24 products-grid min-h-screen">
       <div className="relative">
-        {/* <div className="flex items-center gap-3 mb-6">
-          <ProductBackButton />
-        </div> */}
-        <div className="flex justify-center items-center">
-          <CustomCarousel />
+        <ProductGallery />
+        <div className="space-y-4">
+          <h1 className="text-3xl mt-10 font-dmsans md:text-4xl lg:text-5xl">
+            {currProduct.name}
+          </h1>
+          <p className="text-gray-500">{currProduct.description}</p>
+
+          <div className="flex flex-row gap-2 w-full justify-end">
+            <Link href="/cart" className="p-button text-white">
+              Add to Cart
+            </Link>
+            <Button>Buy Now</Button>
+          </div>
         </div>
       </div>
       <ProductDetails product={currProduct} />
